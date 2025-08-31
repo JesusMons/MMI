@@ -1,0 +1,129 @@
+<div class="card">
+  <div class="flex flex-col md:flex-row">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+      class="w-full md:w-5/12 flex flex-col items-center justify-center gap-3 py-5"
+    >
+      <!-- Username -->
+      <div class="flex flex-col gap-2 w-full max-w-[17.35rem]">
+        <label for="username">Username</label>
+        <input
+          pInputText
+          id="username"
+          type="text"
+          formControlName="username"
+          [ngClass]="{
+            'p-invalid':
+              form.get('username')?.invalid &&
+              (form.get('username')?.dirty || form.get('username')?.touched)
+          }"
+        />
+        <small class="p-error" *ngIf="form.get('username')?.hasError('required') && (form.get('username')?.dirty || form.get('username')?.touched)">
+          Requerido.
+        </small>
+        <small class="p-error" *ngIf="form.get('username')?.hasError('minlength') && (form.get('username')?.dirty || form.get('username')?.touched)">
+          Mínimo 3 caracteres.
+        </small>
+      </div>
+
+      <!-- Nombre -->
+      <div class="flex flex-col gap-2 w-full max-w-[17.35rem]">
+        <label for="first_name">Nombre</label>
+        <input
+          pInputText
+          id="first_name"
+          type="text"
+          formControlName="first_name"
+          [ngClass]="{
+            'p-invalid':
+              form.get('first_name')?.invalid &&
+              (form.get('first_name')?.dirty || form.get('first_name')?.touched)
+          }"
+        />
+        <small class="p-error" *ngIf="form.get('first_name')?.hasError('required') && (form.get('first_name')?.dirty || form.get('first_name')?.touched)">
+          Requerido.
+        </small>
+      </div>
+
+      <!-- Apellido -->
+      <div class="flex flex-col gap-2 w-full max-w-[17.35rem]">
+        <label for="last_name">Apellido</label>
+        <input
+          pInputText
+          id="last_name"
+          type="text"
+          formControlName="last_name"
+          [ngClass]="{
+            'p-invalid':
+              form.get('last_name')?.invalid &&
+              (form.get('last_name')?.dirty || form.get('last_name')?.touched)
+          }"
+        />
+        <small class="p-error" *ngIf="form.get('last_name')?.hasError('required') && (form.get('last_name')?.dirty || form.get('last_name')?.touched)">
+          Requerido.
+        </small>
+      </div>
+
+      <!-- Correo -->
+      <div class="flex flex-col gap-2 w-full max-w-[17.35rem]">
+        <label for="email">Correo</label>
+        <input
+          pInputText
+          id="email"
+          type="email"
+          formControlName="email"
+          [ngClass]="{
+            'p-invalid':
+              form.get('email')?.invalid &&
+              (form.get('email')?.dirty || form.get('email')?.touched)
+          }"
+        />
+        <small class="p-error" *ngIf="form.get('email')?.hasError('required') && (form.get('email')?.dirty || form.get('email')?.touched)">
+          Requerido.
+        </small>
+        <small class="p-error" *ngIf="form.get('email')?.hasError('email') && (form.get('email')?.dirty || form.get('email')?.touched)">
+          Correo inválido.
+        </small>
+      </div>
+
+      <!-- Password -->
+      <div class="flex flex-col gap-2 w-full max-w-[17.35rem]">
+        <label for="password">Password</label>
+        <input
+          pInputText
+          id="password"
+          type="password"
+          formControlName="password"
+          [ngClass]="{
+            'p-invalid':
+              form.get('password')?.invalid &&
+              (form.get('password')?.dirty || form.get('password')?.touched)
+          }"
+        />
+        <small class="p-error" *ngIf="form.get('password')?.hasError('required') && (form.get('password')?.dirty || form.get('password')?.touched)">
+          Requerido.
+        </small>
+        <small class="p-error" *ngIf="form.get('password')?.hasError('minlength') && (form.get('password')?.dirty || form.get('password')?.touched)">
+          Mínimo 8 caracteres.
+        </small>
+      </div>
+
+      <!-- Botón -->
+      <div class="flex w-full">
+        <p-button
+          label="Registrarme"
+          icon="pi pi-user-plus"
+          class="w-full max-w-[17.35rem]"
+          styleClass="w-full mx-auto"
+          type="submit"
+          [loading]="loading"
+          [disabled]="form.invalid || loading"
+        >
+        </p-button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<p-toast></p-toast>

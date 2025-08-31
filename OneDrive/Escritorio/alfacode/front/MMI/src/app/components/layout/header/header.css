@@ -1,0 +1,16 @@
+.custom-login-btn .p-button {
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+}
+
+.custom-signup-btn .p-button {
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+}
+
+
+.card {
+    background-color: #1976d2; /* Azul */
+}

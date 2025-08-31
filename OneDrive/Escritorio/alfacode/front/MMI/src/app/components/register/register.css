@@ -1,0 +1,7 @@
+/* Espaciados y ancho máximo (primeflex ya aporta utilidades) */
+.max-w-2xl { max-width: 42rem; }
+
+/* Pequeño ajuste visual al estado inválido */
+input.p-invalid, .p-password .p-inputtext.p-invalid {
+  border-color: var(--red-500);
+}
