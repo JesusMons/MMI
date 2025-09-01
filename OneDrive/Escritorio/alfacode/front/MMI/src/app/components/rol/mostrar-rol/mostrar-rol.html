@@ -1,0 +1,61 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="card-header">
+      <h3 class="title nowrap">Registro de Roles</h3>
+
+      <a
+        pButton
+        pRipple
+        label="Crear Rol"
+        icon="pi pi-plus"
+        class="p-button-success nowrap"
+        [routerLink]="['crear/']">
+      </a>
+    </div>
+  </ng-template>
+
+  <div class="table-wrap">
+    <p-table
+      [value]="roles"
+      [responsiveLayout]="'scroll'"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5,10,20]"
+      styleClass="w-full">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 80px;">ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th style="width: 160px; text-align:center;">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rol>
+        <tr>
+          <td>{{ rol.id }}</td>
+          <td>{{ rol.nombre }}</td>
+          <td>{{ rol.descripcion }}</td>
+          <td class="actions">
+            <a
+              pButton
+              pRipple
+              icon="pi pi-sync"
+              severity="warn"
+              class="mr-2"
+              [routerLink]="['/roles/edit', rol.id]">
+            </a>
+
+            <button
+              pButton
+              pRipple
+              severity="danger"
+              icon="pi pi-eraser"
+              (click)="eliminarRol(rol.id)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>

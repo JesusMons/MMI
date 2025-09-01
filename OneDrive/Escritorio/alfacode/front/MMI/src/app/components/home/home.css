@@ -1,0 +1,33 @@
+/* 1) Apaga el scroll global y quita márgenes del navegador */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* 2) Si el header ocupa altura en el flujo normal, define su alto aquí: */
+:root {
+  /* pon la altura real de tu header si está encima de <main> y NO es fixed */
+  --header-h: 0px;  /* ej. 64px si el header está arriba ocupando espacio */
+}
+
+/* 3) Grid central: aside + content arriba, footer abajo */
+main {
+  height: 89dvh;
+  display: grid;
+  grid-template-columns: 260px 1fr;   /* ancho aside fijo + content flexible */
+  grid-template-rows: 1fr auto;       /* zona central crece; footer a su alto */
+  grid-template-areas:
+    "aside section"
+    "footer footer";
+  gap: 0;
+  min-height: 0;                      /* clave para que overflow interno funcione */
+}
+
+/* 4) Zonas (ojo: <content> NO es estándar, forzamos block) */
+main > aside   { grid-area: aside;   overflow: auto; border: 1px solid royalblue; }
+main > content { grid-area: section; overflow: auto; border: 1px solid royalblue; display: block; }
+main > footer  { grid-area: footer;  border: 1px solid royalblue; }
+
+/* Por si algún contenedor padre tiene padding que provoca scroll */
+*, *::before, *::after { box-sizing: border-box; }

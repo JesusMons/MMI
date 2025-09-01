@@ -19,7 +19,7 @@ export class Login {
   loading = false;
   error = '';
 
-  constructor(private userService: User, private router: Router) {}
+  constructor(private userService: User, private router: Router) { }
 
   login(): void {
     if (!this.username || !this.password) {
@@ -32,7 +32,9 @@ export class Login {
     this.userService.login(this.username, this.password).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();   // 🔥 recarga total de la app
+        });
       },
       error: (err) => {
         this.loading = false;
@@ -42,5 +44,6 @@ export class Login {
           'Usuario o contraseña incorrectos';
       }
     });
+
   }
 }

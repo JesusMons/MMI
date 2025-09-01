@@ -1,0 +1,43 @@
+<p-card class="w-full">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between align-items-center">
+      <h3 class="m-0 text-xl font-bold">Nuevo Rol</h3>
+      <!-- Botón volver normal -->
+      <a class="btn btn-back" [routerLink]="['/roles']">← Volver</a>
+    </div>
+  </ng-template>
+
+  <form [formGroup]="form" (ngSubmit)="save()" class="grid gap-3">
+    <div class="field">
+      <label for="nombre">Nombre *</label>
+      <input id="nombre" formControlName="nombre" [disabled]="loading" class="form-control"/>
+      <small class="text-error" *ngIf="f.nombre.touched && f.nombre.errors?.['required']">
+        El nombre es obligatorio.
+      </small>
+    </div>
+
+    <div class="field">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        formControlName="descripcion"
+        rows="3"
+        class="form-control"
+        [disabled]="loading">
+      </textarea>
+    </div>
+
+    <div *ngIf="error" class="text-error">{{ error }}</div>
+
+    <div class="actions flex justify-content-end gap-2 mt-3">
+      <!-- Botones normales -->
+      <button type="button" class="btn btn-cancel" (click)="cancel()" [disabled]="loading">
+        Cancelar
+      </button>
+
+      <button type="submit" class="btn btn-save" [disabled]="loading">
+        Guardar
+      </button>
+    </div>
+  </form>
+</p-card>

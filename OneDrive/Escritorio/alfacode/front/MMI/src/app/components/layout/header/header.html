@@ -1,16 +1,42 @@
 <div class="card">
-    <p-menubar [model]="items">
-        <ng-template #end>
-            <div class="flex items-center gap-2">
-                <div class="w-full md:w-5/12 flex items-center justify-center py-5">
-                    <p-button label="Login" icon="pi pi-user-plus" class="w-full max-w-[17.35rem] custom-login-btn"
-                        styleClass="w-full mx-auto" [routerLink]="'/login'"></p-button>
-                </div>
-                <div class="w-full md:w-8/12 flex items-center justify-center py-5 ">
-                    <p-button label="Sign Up" icon="pi pi-user-plus" class="w-full max-w-[28rem] custom-signup-btn"
-                        styleClass="w-full mx-auto" [routerLink]="'/register'"></p-button>
-                </div>
-            </div>
+  <p-menubar [model]="items">
+    <ng-template #end>
+      <div class="flex items-center gap-2">
+        <!-- Mostrar Login/SignUp solo si NO hay sesión -->
+        <ng-container *ngIf="!isLoggedIn; else logoutTemplate">
+          <div class="w-full md:w-5/12 flex items-center justify-center py-5">
+            <p-button 
+              label="Login" 
+              icon="pi pi-sign-in" 
+              class="w-full max-w-[17.35rem] custom-login-btn"
+              styleClass="w-full mx-auto" 
+              [routerLink]="'/login'">
+            </p-button>
+          </div>
+          <div class="w-full md:w-8/12 flex items-center justify-center py-5">
+            <p-button 
+              label="Sign Up" 
+              icon="pi pi-user-plus" 
+              class="w-full max-w-[28rem] custom-signup-btn"
+              styleClass="w-full mx-auto" 
+              [routerLink]="'/register'">
+            </p-button>
+          </div>
+        </ng-container>
+
+        <!-- Mostrar Logout si hay sesión -->
+        <ng-template #logoutTemplate>
+          <div class="w-full flex items-center justify-center py-5">
+            <p-button 
+              label="Logout" 
+              icon="pi pi-sign-out" 
+              class="w-full max-w-[17.35rem] custom-logout-btn"
+              styleClass="w-full mx-auto" 
+              (onClick)="logout()">
+            </p-button>
+          </div>
         </ng-template>
-    </p-menubar>
+      </div>
+    </ng-template>
+  </p-menubar>
 </div>

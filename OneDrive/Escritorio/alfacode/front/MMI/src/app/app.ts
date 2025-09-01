@@ -12,7 +12,7 @@ import { Login } from './components/login/login';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule, Aside, Content, Header, Footer, Login],
+  imports: [RouterOutlet, ButtonModule, Aside, Content, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

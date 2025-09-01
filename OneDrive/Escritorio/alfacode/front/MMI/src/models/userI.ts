@@ -102,6 +102,7 @@ export interface CrearUsuarioDto {
 export interface ActualizarUsuarioDto extends Partial<CrearUsuarioDto> {}
 
 export interface CrearRolDto {
+  id?: ID;
   nombre: string;
   descripcion?: string | null;
 }

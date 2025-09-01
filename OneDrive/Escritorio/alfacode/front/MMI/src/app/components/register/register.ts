@@ -8,7 +8,8 @@ import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { User, RegisterDto } from '../../services/user';
+import { User } from '../../services/user';
+import { CrearUsuarioDto } from '../../../models/userI';
 
 @Component({
   selector: 'app-register',
@@ -51,7 +52,7 @@ export class Register {
 
     const { username, first_name, last_name, email, password } = this.form.getRawValue();
 
-    const payload: RegisterDto = {
+    const payload: CrearUsuarioDto = {
       username,
       first_name,
       last_name,
