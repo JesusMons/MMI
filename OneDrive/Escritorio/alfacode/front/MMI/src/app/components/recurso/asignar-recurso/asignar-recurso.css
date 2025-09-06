@@ -1,0 +1,8 @@
+.header { gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: .25rem; }
+.muted { color: #6b7280; margin-bottom: .5rem; }
+.error { color: #dc2626; margin-top: .25rem; }
+.ok { color: #16a34a; margin-bottom: .5rem; }
+.actions { display: flex; gap: .5rem; margin-top: .5rem; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }

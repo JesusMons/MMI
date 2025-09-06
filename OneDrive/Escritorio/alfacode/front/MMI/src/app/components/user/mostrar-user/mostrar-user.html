@@ -1,0 +1,70 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="header flex justify-content-between align-items-center">
+      <h3 class="m-0">Lista de Usuarios</h3>
+
+      <a
+        pButton
+        label="Registrar Usuario"
+        icon="pi pi-user-plus"
+        class="p-button-success"
+        [routerLink]="['/register']">
+      </a>
+    </div>
+  </ng-template>
+
+  <div *ngIf="loading" class="muted">Cargando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <p-table
+    *ngIf="!loading && usuarios.length"
+    [value]="usuarios"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [responsiveLayout]="'scroll'"
+    styleClass="w-full">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 80px;">ID</th>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Rol(es)</th>
+        <th style="width: 160px; text-align:center;">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-u>
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.first_name || '—' }}</td>
+        <td>{{ u.last_name || '—' }}</td>
+        <td>{{ rolesDe(u) }}</td>
+        <td class="text-center">
+          <!-- Editar -->
+          <a
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-warning mr-2"
+            [routerLink]="['/usuarios/actualizar-user', u.id]">
+          </a>
+
+          <!-- Eliminar -->
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="eliminarUsuario(u.id)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf="!loading && !usuarios.length" class="muted">
+    No hay usuarios para mostrar.
+  </div>
+</p-card>

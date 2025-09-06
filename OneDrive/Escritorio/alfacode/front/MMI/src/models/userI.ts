@@ -108,6 +108,7 @@ export interface CrearRolDto {
 }
 
 export interface CrearRecursoDto {
+  id?: ID;
   nombre: string;
   url: string;
 }
@@ -128,4 +129,10 @@ export interface ApiList<T> {
   next: string | null;
   previous: string | null;
   results: T[];
+}
+export interface ApiList<T> {
+  count: number;          // Total de elementos
+  next: string | null;    // URL de la siguiente página
+  previous: string | null;// URL de la página anterior
+  results: T[];           // Lista de resultados
 }

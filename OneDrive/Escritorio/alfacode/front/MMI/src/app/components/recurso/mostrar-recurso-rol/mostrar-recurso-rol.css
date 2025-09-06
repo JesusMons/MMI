@@ -1,0 +1,8 @@
+.header { gap: .75rem; }
+.muted { color: #6b7280; }
+.error { color: #dc2626; }
+select.p-inputtext {
+  padding: .5rem .75rem;
+  border: 1px solid #d1d5db;
+  border-radius: .5rem;
+}

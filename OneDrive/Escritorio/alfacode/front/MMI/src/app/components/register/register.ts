@@ -7,8 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
-import { User } from '../../services/user';
+import { Router, RouterModule } from '@angular/router';
+import { User } from '../../services/auth';
 import { CrearUsuarioDto } from '../../../models/userI';
 
 @Component({
@@ -16,7 +16,7 @@ import { CrearUsuarioDto } from '../../../models/userI';
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule,
-    InputTextModule, PasswordModule, ButtonModule, CardModule, ToastModule
+    InputTextModule, PasswordModule, ButtonModule, CardModule, ToastModule, RouterModule 
   ],
   templateUrl: './register.html',
   styleUrls: ['./register.css'],
@@ -66,7 +66,7 @@ export class Register {
       next: () => {
         this.loading = false;
         this.msg.add({ severity: 'success', summary: 'Cuenta creada', detail: 'Ahora inicia sesión.' });
-        this.router.navigate(['/login']);
+        this.router.navigate(['/usuarios']);
         console.log('Usuario registrado:', payload);
       },
       error: (err) => {

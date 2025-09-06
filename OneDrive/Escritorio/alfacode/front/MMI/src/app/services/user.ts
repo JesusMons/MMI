@@ -1,52 +1,67 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CrearUsuarioDto } from '../../models/userI';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
-
-
-export interface HelloResp {
-  message?: string;
-  detail?: string; // por si viene un error del back
+export interface Rol {
+  id: number;
+  nombre: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class User {
-  api_uri_django = 'http://localhost:8000';
-  base_path = `${this.api_uri_django}/api/autenticacion/`;
+export interface Usuario {
+  id: number;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  promedio?: number | null;
+  disponibilidad?: boolean;
+  roles?: Rol[]; // 👈 viene del backend
+}
 
-  constructor(private http: HttpClient) { }
+export interface PagedResponse<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
 
-  login(username: string, password: string): Observable<any> {
-    const body = { username, password };
-    return this.http.post(
-      `${this.base_path}login/`,
-      body,
-      { withCredentials: true }   // <— importante
-    );
+@Injectable({ providedIn: 'root' })
+export class UsuariosService {
+  private readonly base_path = 'http://localhost:8000/usuarios/';
+
+  constructor(private http: HttpClient) {}
+
+  listar(params?: {
+    page?: number;
+    page_size?: number;
+    search?: string;
+    ordering?: string;
+  }): Observable<Usuario[]> {
+    let httpParams = new HttpParams();
+    if (params?.page) httpParams = httpParams.set('page', params.page);
+    if (params?.page_size) httpParams = httpParams.set('page_size', params.page_size);
+    if (params?.search) httpParams = httpParams.set('search', params.search);
+    if (params?.ordering) httpParams = httpParams.set('ordering', params.ordering);
+
+    return this.http
+      .get<Usuario[] | PagedResponse<Usuario>>(this.base_path, {
+        params: httpParams,
+        withCredentials: true,
+      })
+      .pipe(map((res: any) => (Array.isArray(res) ? res : res?.results ?? [])));
   }
 
-  register(data: CrearUsuarioDto): Observable<any> {
-    return this.http.post(`${this.base_path}register/`, data);
+  obtener(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`${this.base_path}${id}/`, { withCredentials: true });
   }
 
-  helloFromCookie(): Observable<HelloResp> {
-    return this.http.get<HelloResp>(
-      `${this.base_path}hello/`,
-      { withCredentials: true }   // IMPORTANTE para que viaje la cookie
-    );
+  /** (Opcional) Actualizar usuario */
+  actualizar(id: number, data: Partial<Usuario>): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.base_path}${id}/`, data, { withCredentials: true });
   }
 
-  // src/app/services/user.ts
-
-  logout(): Observable<any> {
-    return this.http.post(
-      `${this.base_path}logout/`,
-      {},                          // el body puede ir vacío
-      { withCredentials: true }    // clave para enviar las cookies
-    );
+  /** (Opcional) Eliminar usuario */
+  eliminar(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.base_path}${id}/`, { withCredentials: true });
   }
-
 }

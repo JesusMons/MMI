@@ -8,7 +8,7 @@ import { Ripple } from 'primeng/ripple';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../../services/user';
+import { User } from '../../../services/auth';
 
 @Component({
   selector: 'app-header',

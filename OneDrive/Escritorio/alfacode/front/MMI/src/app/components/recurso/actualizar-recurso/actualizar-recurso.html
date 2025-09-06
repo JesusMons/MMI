@@ -1,0 +1,42 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="header flex justify-content-between align-items-center">
+      <h3 class="m-0">Actualizar Recurso</h3>
+      <a pButton label="Volver" icon="pi pi-arrow-left" [routerLink]="['/recursos']"></a>
+    </div>
+  </ng-template>
+
+  <div *ngIf="loading" class="muted">Cargando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="save()" class="grid gap-3">
+    <div>
+      <label for="nombre">Nombre *</label>
+      <input pInputText id="nombre" formControlName="nombre" [disabled]="loading" />
+      <small *ngIf="f.nombre.touched && f.nombre.errors?.['required']" class="error">
+        El nombre es obligatorio.
+      </small>
+      <small *ngIf="f.nombre.touched && f.nombre.errors?.['maxlength']" class="error">
+        Máximo 150 caracteres.
+      </small>
+    </div>
+
+    <div>
+      <label for="url">URL *</label>
+      <input pInputText id="url" formControlName="url" [disabled]="loading" />
+      <small *ngIf="f.url.touched && f.url.errors?.['required']" class="error">
+        La URL es obligatoria.
+      </small>
+      <small *ngIf="f.url.touched && f.url.errors?.['maxlength']" class="error">
+        Máximo 255 caracteres.
+      </small>
+    </div>
+
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <div class="actions">
+      <button pButton type="button" label="Cancelar" class="p-button-secondary" (click)="cancel()" [disabled]="loading"></button>
+      <button pButton type="submit" label="Guardar" icon="pi pi-save" [disabled]="loading"></button>
+    </div>
+  </form>
+</p-card>

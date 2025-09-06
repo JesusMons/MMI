@@ -1,0 +1,50 @@
+<p-card class="w-full h-full">
+    <ng-template pTemplate="header">
+        <div class="header">
+            <h3 class="m-0">Actualizar Usuario</h3>
+            <a pButton label="Volver" icon="pi pi-arrow-left" [routerLink]="['/usuarios']"></a>
+        </div>
+    </ng-template>
+
+    <div *ngIf="loading" class="muted">Cargando...</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="grid gap-3" *ngIf="!loading">
+        <div>
+            <label for="username">Usuario *</label>
+            <input pInputText id="username" formControlName="username" [disabled]="loading" />
+            <small *ngIf="f.username.touched && f.username.errors?.['required']" class="error">
+                El nombre de usuario es obligatorio.
+            </small>
+            <small *ngIf="f.username.touched && f.username.errors?.['maxlength']" class="error">
+                Máximo 150 caracteres.
+            </small>
+        </div>
+
+        <div>
+            <label for="first_name">Nombre</label>
+            <input pInputText id="first_name" formControlName="first_name" [disabled]="loading" />
+        </div>
+
+        <div>
+            <label for="last_name">Apellido</label>
+            <input pInputText id="last_name" formControlName="last_name" [disabled]="loading" />
+        </div>
+
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+
+        <div class="actions">
+            <div class="actions">
+                <button pButton type="button" label="Cancelar" class="p-button-secondary" [disabled]="loading"
+                    (click)="cancel()">
+                </button>
+
+                <button pButton type="submit" label="Guardar" icon="pi pi-save" [disabled]="loading">
+                </button>
+            </div>
+
+
+        </div>
+    </form>
+</p-card>

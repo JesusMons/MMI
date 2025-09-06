@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';   // 👈 importar esto
-import { User } from '../../services/user'; 
+import { User } from '../../services/auth'; 
 import { Aside } from '../layout/aside/aside';
 import { Footer } from '../layout/footer/footer';
 import { Header } from '../layout/header/header';

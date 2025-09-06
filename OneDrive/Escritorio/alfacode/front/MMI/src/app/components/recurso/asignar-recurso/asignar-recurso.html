@@ -1,0 +1,62 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="header flex justify-content-between align-items-center">
+      <h3 class="m-0">Asignar recurso a rol</h3>
+      <a pButton label="Volver" icon="pi pi-arrow-left" [routerLink]="['/recursos']"></a>
+    </div>
+  </ng-template>
+
+  <div *ngIf="loading" class="muted">Cargando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <div *ngIf="okMsg" class="ok">{{ okMsg }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="asignar()" class="grid gap-3" *ngIf="!loading">
+    <!-- Select Rol -->
+    <div class="field">
+      <label for="rol">Rol *</label>
+      <select id="rol"
+              formControlName="rolId"
+              [disabled]="loading"
+              class="p-inputtext w-full">
+        <option [ngValue]="null">— Selecciona un rol —</option>
+        <option *ngFor="let r of roles" [ngValue]="r.id">{{ r.nombre }}</option>
+      </select>
+      <small class="error" *ngIf="f.rolId.touched && f.rolId.errors?.['required']">
+        El rol es obligatorio.
+      </small>
+    </div>
+
+    <!-- Select Recurso -->
+    <div class="field">
+      <label for="recurso">Recurso *</label>
+      <select id="recurso"
+              formControlName="recursoId"
+              [disabled]="loading"
+              class="p-inputtext w-full">
+        <option [ngValue]="null">— Selecciona un recurso —</option>
+        <option *ngFor="let rec of recursos" [ngValue]="rec.id">
+          {{ rec.nombre }} ({{ rec.url }})
+        </option>
+      </select>
+      <small class="error" *ngIf="f.recursoId.touched && f.recursoId.errors?.['required']">
+        El recurso es obligatorio.
+      </small>
+    </div>
+
+    <!-- Acciones -->
+    <div class="actions">
+      <button pButton type="button"
+              class="p-button-secondary"
+              [disabled]="loading"
+              (click)="resetForm()">
+        Limpiar
+      </button>
+
+      <button pButton type="submit"
+              icon="pi pi-check"
+              [disabled]="loading">
+        Asignar
+      </button>
+    </div>
+  </form>
+</p-card>

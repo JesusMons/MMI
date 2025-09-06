@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.muted {
+  color: #64748b; /* slate-500 */
+  margin: .5rem 0;
+}
+
+.error {
+  color: #dc2626; /* red-600 */
+  margin: .5rem 0;
+}

@@ -4,13 +4,13 @@ import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, Validators, NonNullableFormBuilder } from '@angular/forms';
 import { Card } from 'primeng/card';
 import { InputText } from 'primeng/inputtext';
-import { Button } from 'primeng/button';
+import { Button, ButtonModule } from 'primeng/button';
 import { RolService } from '../../../services/rol'; // 👈 nombre real del archivo
 
 @Component({
   selector: 'app-crear-rol',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, Card, InputText, Button],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, Card, InputText, ButtonModule],
   templateUrl: './crear-rol.html',
   styleUrls: ['./crear-rol.css'],
 })

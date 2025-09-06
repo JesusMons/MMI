@@ -21,8 +21,8 @@ export class Aside implements OnInit {
         label: 'Usuarios',
         icon: 'pi pi-user',
         items: [
-          { label: 'Ver', icon: 'pi pi-users' },
-          { label: 'Crear', icon: 'pi pi-inbox', badge: '5' },
+          { label: 'Ver', icon: 'pi pi-users', routerLink: 'usuarios/' },
+          { label: 'Crear', icon: 'pi pi-inbox', badge: '5', routerLink: 'register/' },
           
         ]
       },
@@ -39,9 +39,10 @@ export class Aside implements OnInit {
         label: 'Recursos',
         icon: 'pi pi-folder-plus',
         items: [
-          { label: 'Ver recurso', icon: 'pi pi-cog', shortcut: '⌘+O' },
-          { label: 'Crear recuro', icon: 'pi pi-shield', shortcut: '⌘+P' },
-          { label: 'Asignar recurso', icon: 'pi pi-user-plus' }
+          { label: 'Ver recurso', icon: 'pi pi-cog', routerLink: 'recursos/' },
+          { label: 'Crear recurso', icon: 'pi pi-shield', routerLink: 'recursos/crear' },
+          {label: 'Mostrar asignaciones', icon: 'pi pi-table', routerLink: 'recursos/roles/:rol_id/recursos'},
+          { label: 'Asignar recurso', icon: 'pi pi-user-plus', routerLink: 'recursos/asignar-recurso' }
         ]
       }
     ];

@@ -1,0 +1,66 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="header flex justify-content-between align-items-center">
+      <h3 class="m-0">Recursos por Rol</h3>
+      <a pButton label="Volver a Roles" icon="pi pi-arrow-left" [routerLink]="['/roles']"></a>
+    </div>
+  </ng-template>
+
+  <!-- Filtro -->
+  <div class="filtros grid gap-2 mb-3">
+    <label class="block mb-1">Rol</label>
+    <select [(ngModel)]="selectedRolId" class="p-inputtext w-full">
+      <option [ngValue]="null">— Selecciona un rol —</option>
+      <option *ngFor="let r of roles" [ngValue]="r.id">{{ r.nombre }}</option>
+    </select>
+
+    <div class="mt-2">
+      <button pButton label="Buscar" icon="pi pi-search"
+              class="p-button-success mr-2" (click)="buscar()"></button>
+      <button pButton label="Limpiar" icon="pi pi-times"
+              class="p-button-secondary" (click)="limpiar()"></button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="muted">Cargando…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <p-table *ngIf="!loading && asignaciones.length"
+           [value]="asignaciones"
+           [paginator]="true" [rows]="10"
+           [rowsPerPageOptions]="[5,10,20]"
+           [responsiveLayout]="'scroll'"
+           styleClass="w-full">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 80px;">ID</th>
+        <th>Rol</th>
+        <th>Recurso</th>
+        <th>URL</th>
+        <th>Asignado en</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{ row.id }}</td>
+        <td>{{ rolNombre(row) }}</td>
+        <td>{{ recursoNombre(row) }}</td>
+        <td>
+          <ng-container *ngIf="recursoUrl(row) as u">
+            <ng-container *ngIf="u !== '—'; else dash">
+              <a [href]="u" target="_blank" rel="noopener noreferrer">{{ u }}</a>
+            </ng-container>
+          </ng-container>
+          <ng-template #dash>—</ng-template>
+        </td>
+        <td>{{ fechaAsignado(row) }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf="!loading && !asignaciones.length" class="muted">
+    No hay recursos asignados para este rol.
+  </div>
+</p-card>
