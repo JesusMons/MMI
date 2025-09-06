@@ -68,8 +68,23 @@ class CookieLoginView(APIView):
             }
         })
 
-        response.set_cookie(key='access_token', value=access_token, httponly=True, secure=False, samesite='Lax', max_age=60 * 60,)
-        response.set_cookie(key='refresh_token', value=refresh_token, httponly=True, secure=False, samesite='Lax', max_age=60 * 60 * 24,)
+        response.set_cookie(
+            key='access_token',
+            value=access_token,
+            httponly=True,
+            secure=True,          # en prod; en local usa HTTPS o, si no puedes, pon False temporalmente
+            samesite='None',      # <— clave para cross-origin
+            max_age=60*60,
+        )
+
+        response.set_cookie(
+            key='refresh_token',
+            value=refresh_token,
+            httponly=True,
+            secure=True,          # idem
+            samesite='None',
+            max_age=60*60*24,
+        )
 
         return response
 
@@ -137,9 +152,16 @@ class RecursoRolCreateView(generics.CreateAPIView):
 
 # Listar todos los recursos por rol
 class RecursosPorRolListView(generics.ListAPIView):
-    serializer_class = RecursoSerializer
+    """
+    - GET /api/autenticacion/recursos-rol/           -> todas las asignaciones recurso–rol
+    - GET /api/autenticacion/recursos-rol/<rol_id>/  -> asignaciones del rol indicado
+    """
+    serializer_class = RecursoRolSerializer
     permission_classes = [IsAuthenticated, IsAdminRole]
 
     def get_queryset(self):
-        rol_id = self.kwargs['rol_id']
-        return Recurso.objects.filter(roles__rol_id=rol_id)
+        rol_id = self.kwargs.get('rol_id')
+        qs = RecursoRol.objects.select_related('rol', 'recurso').all()
+        if rol_id is not None:
+            qs = qs.filter(rol_id=rol_id)
+        return qs

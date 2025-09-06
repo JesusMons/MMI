@@ -26,6 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.inventario.apps.InventarioConfig',
+    'apps.mantenimiento.apps.MantenimientoConfig',
+    'apps.renta.apps.RentaConfig',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -137,8 +140,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'autenticacion.Usuario'
 
-CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:4200',
-)
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
+CORS_ALLOW_CREDENTIALS = True
+
+# Si usas CSRF:
+CSRF_TRUSTED_ORIGINS = ["http://localhost:4200"]
+
 

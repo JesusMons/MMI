@@ -1,6 +1,6 @@
 from django.contrib import admin
-from django.urls import path
 from apps.autenticacion.views import *
+from apps.renta.views import *
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -13,5 +13,6 @@ urlpatterns = [
 
     path('usuarios/', UsuarioListView.as_view(), name='usuario-list-create'),
     path('usuarios/<int:pk>/', UsuarioRetrieveUpdateDestroyView.as_view(), name='usuario-detail'),
-
+    
+    path('api/renta/', include('apps.renta.urls')),
 ]
