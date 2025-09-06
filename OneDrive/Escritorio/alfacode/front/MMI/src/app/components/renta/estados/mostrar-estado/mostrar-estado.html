@@ -1,1 +1,67 @@
-<p>mostrar-estado works!</p>
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between align-items-center">
+      <h3 class="m-0">Lista de Estados</h3>
+
+      <!-- Opción A: usar método TS -->
+      <button
+        pButton
+        label="Nuevo Estado"
+        icon="pi pi-plus"
+        class="p-button-success"
+        (click)="crearEstado()">
+      </button>
+
+      <!-- Opción B (si prefieres link directo):
+      <a pButton label="Nuevo Estado" icon="pi pi-plus" class="p-button-success" [routerLink]="['/estados/crear']"></a>
+      -->
+    </div>
+  </ng-template>
+
+  <div *ngIf="loading" class="muted">Cargando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <p-table
+    *ngIf="!loading && estados.length"
+    [value]="estados"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [responsiveLayout]="'scroll'"
+    styleClass="w-full">
+    
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 100px;">ID</th>
+        <th>Nombre</th>
+        <th style="width: 180px; text-align: center;">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-estado>
+      <tr>
+        <td>{{ estado.id }}</td>
+        <td>{{ estado.nombre }}</td>
+        <td class="actions text-center">
+          <a
+            pButton
+            icon="pi pi-pencil"
+            class="p-button-warning mr-2"
+            [routerLink]="['/estados/editar', estado.id]">
+          </a>
+
+          <button
+            pButton
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="eliminarEstado(estado.id)">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf="!loading && !estados.length" class="muted">
+    No hay estados registrados.
+  </div>
+</p-card>

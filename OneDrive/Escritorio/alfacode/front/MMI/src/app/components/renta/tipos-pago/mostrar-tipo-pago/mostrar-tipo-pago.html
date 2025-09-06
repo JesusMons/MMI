@@ -1,1 +1,39 @@
-<p>mostrar-tipo-pago works!</p>
+<!-- src/app/components/renta/tipos-pago/mostrar-tipo-pago/mostrar-tipo-pago.html -->
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between align-items-center">
+      <h3 class="m-0">Tipos de Pago</h3>
+      <button pButton label="Nuevo" icon="pi pi-plus" class="p-button-success" [routerLink]="['/tipo-pago/crear']"></button>
+    </div>
+  </ng-template>
+
+  <div *ngIf="loading" class="muted">Cargando…</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <p-table *ngIf="!loading && tipos.length"
+           [value]="tipos"
+           [paginator]="true"
+           [rows]="10"
+           [rowsPerPageOptions]="[5,10,20]"
+           [responsiveLayout]="'scroll'">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:90px;">ID</th>
+        <th>Nombre</th>
+        <th style="width:160px; text-align:center;">Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-t>
+      <tr>
+        <td>{{ t.id }}</td>
+        <td>{{ t.nombre }}</td>
+        <td class="text-center">
+          <button pButton icon="pi pi-pencil" class="p-button-warning mr-2" (click)="editar(t.id)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-danger" (click)="eliminar(t.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <div *ngIf="!loading && !tipos.length" class="muted">No hay tipos de pago.</div>
+</p-card>

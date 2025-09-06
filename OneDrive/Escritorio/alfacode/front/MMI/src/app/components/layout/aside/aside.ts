@@ -44,6 +44,22 @@ export class Aside implements OnInit {
           {label: 'Mostrar asignaciones', icon: 'pi pi-table', routerLink: 'recursos/roles/:rol_id/recursos'},
           { label: 'Asignar recurso', icon: 'pi pi-user-plus', routerLink: 'recursos/asignar-recurso' }
         ]
+      },
+      {
+        label: 'Estados',
+        icon: 'pi pi-book',
+        items: [
+          { label: 'Ver estados', icon: 'pi pi-book', routerLink: 'estados/' },
+          { label: 'Crear estado', icon: 'pi pi-bookmark', routerLink: 'estados/crear' }
+        ]
+      },
+      {
+        label: 'Tipos de Pago',
+        icon: 'pi pi-book',
+        items: [
+          { label: 'Ver tipos de pago', icon: 'pi pi-book', routerLink: 'tipo-pago/' },
+          { label: 'Crear tipos de pago', icon: 'pi pi-bookmark', routerLink: 'tipo-pago/crear/' }
+        ]
       }
     ];
   }

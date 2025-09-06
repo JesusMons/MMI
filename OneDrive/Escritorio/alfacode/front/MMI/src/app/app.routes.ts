@@ -18,6 +18,11 @@ import { CrearRecurso } from './components/recurso/crear-recurso/crear-recurso';
 import { ActualizarRecurso } from './components/recurso/actualizar-recurso/actualizar-recurso';
 import { AsignarRecurso } from './components/recurso/asignar-recurso/asignar-recurso';
 import { MostrarRecursoRol } from './components/recurso/mostrar-recurso-rol/mostrar-recurso-rol';
+import { MostrarEstado } from './components/renta/estados/mostrar-estado/mostrar-estado';
+import { CrearEstado } from './components/renta/estados/crear-estado/crear-estado';
+import { EditarEstado } from './components/renta/estados/editar-estado/editar-estado'
+import { MostrarTipoPago } from './components/renta/tipos-pago/mostrar-tipo-pago/mostrar-tipo-pago'
+import { CrearTipoPago } from './components/renta/tipos-pago/crear-tipo-pago/crear-tipo-pago';
 
 export const routes: Routes = [
     { path: '', component: Home, canActivate: [authGuard] },
@@ -34,4 +39,10 @@ export const routes: Routes = [
     { path: 'recursos/actualizar-recurso/:id', component: ActualizarRecurso, canActivate: [authGuard] },
     { path: 'recursos/asignar-recurso', component: AsignarRecurso, canActivate: [authGuard] },
     { path: 'recursos/roles/:rol_id/recursos', component: MostrarRecursoRol, canActivate: [authGuard] },
+    { path: 'estados', component: MostrarEstado, canActivate: [authGuard] },
+    { path: 'estados/crear', component: CrearEstado, canActivate: [authGuard] },
+    { path: 'estados/editar/:id', component: EditarEstado, canActivate: [authGuard] },
+    { path: 'tipo-pago', component: MostrarTipoPago, canActivate: [authGuard] },
+    { path: 'tipo-pago/crear', component: CrearTipoPago, canActivate: [authGuard] },
+
 ];

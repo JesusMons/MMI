@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+}
+
+.gap-3 {
+  gap: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: .25rem;
+  font-weight: 600;
+}
+
+.error {
+  color: #d32f2f;
+  font-size: .875rem;
+}
+
+.actions :where(button, a) + :where(button, a) {
+  margin-left: .5rem;
+}

@@ -1,1 +1,31 @@
-<p>crear-tipo-pago works!</p>
+<p-card class="card">
+  <ng-template pTemplate="header">
+    <div class="card-header">
+      <h3 class="title">Nuevo Tipo de Pago</h3>
+      <a pButton label="Volver" icon="pi pi-arrow-left" [routerLink]="['/tipo-pago']"></a>
+    </div>
+  </ng-template>
+
+  <div *ngIf="error" class="alert error">{{ error }}</div>
+  <div *ngIf="okMsg" class="alert ok">{{ okMsg }}</div>
+
+  <form class="form" (ngSubmit)="guardar()">
+    <div class="field">
+      <label for="nombre">Nombre</label>
+      <input
+        id="nombre"
+        type="text"
+        pInputText
+        [(ngModel)]="nombre"
+        name="nombre"
+        [disabled]="loading"
+        placeholder="Ej: Efectivo, Tarjeta..."
+      />
+    </div>
+
+    <div class="actions">
+      <a pButton label="Cancelar" class="p-button-secondary" [routerLink]="['/tipo-pago']"></a>
+      <button pButton type="submit" label="Guardar" icon="pi pi-save" [disabled]="loading" [routerLink]="['/tipo-pago']"></button>
+    </div>
+  </form>
+</p-card>
